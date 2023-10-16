@@ -22,11 +22,12 @@ public class HelloApplication extends Application {
         //primaryStage.setTitle("Главное окно");
 
         StackPane root = new StackPane();
-        Button btn = new Button("Открыть новое окно");
+        Button btn = new Button("Написать о членах");
         root.getChildren().add(btn);
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Главное окно");
 
         btn.setOnAction(e -> {
             NewWindow newWindow = new NewWindow();
