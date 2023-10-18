@@ -2,8 +2,11 @@ package com.example.notes;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Label;
@@ -15,24 +18,29 @@ public class HelloApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Parent vroot = FXMLLoader.load(getClass().getResource("HelloApplication.fxml"));
-        //FXMLLoader loader = new FXMLLoader(getClass().getResource("HelloApplication.fxml"));
-        //HelloController controller = loader.getController();
-        //Parent vroot = FXMLLoader.load(getClass().getResource("/HelloApplication.fxml"));
-        //primaryStage.setTitle("Главное окно");
-
         StackPane root = new StackPane();
-        Button btn = new Button("Написать о членах");
-        root.getChildren().add(btn);
-
-        Scene scene = new Scene(root, 400, 300);
+        Scene scene = new Scene(root, 900, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Главное очко");
+
+        Button btn = new Button("Написать о членах");
+        btn.setStyle("-fx-background-color: gray; -fx-text-fill: white;"); // Установка стилей для кнопки
+
+        StackPane.setAlignment(btn, Pos.BOTTOM_RIGHT);
+        StackPane.setMargin(btn, new Insets(10));
 
         btn.setOnAction(e -> {
             NewWindow newWindow = new NewWindow();
             newWindow.show();
         });
+
+        root.getChildren().add(btn);
+
+        // Установка цвета фона для корневого контейнера
+        root.setStyle("-fx-background-color: darkgray;");
+
+        // Установка цвета фона для сцены
+        scene.setFill(Color.DARKGREY);
 
         primaryStage.show();
     }
