@@ -27,7 +27,7 @@ public class HelloApplication extends Application {
 
         Scene scene = new Scene(root, 400, 300);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Главное окно");
+        primaryStage.setTitle("Главное очко");
 
         btn.setOnAction(e -> {
             NewWindow newWindow = new NewWindow();
