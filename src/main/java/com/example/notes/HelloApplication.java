@@ -19,7 +19,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root, 900, 600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Главное очко");
-        File folder = new File("D:\\scheduler_start\\JavaTest\\notes\\Saves");
+        File folder = new File("Saves");
         File[] files = folder.listFiles();
 
         Button btn = new Button("Написать о членах");

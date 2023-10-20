@@ -33,7 +33,7 @@ public class NewWindow extends Stage {
 
         saveButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setInitialDirectory(new File("D:\\scheduler_start\\JavaTest\\notes\\Saves"));
+            fileChooser.setInitialDirectory(new File("Saves"));
 
             // Запрос имени файла у пользователя
             TextInputDialog dialog = new TextInputDialog();
@@ -47,7 +47,7 @@ public class NewWindow extends Stage {
                 String fileExtension = ".txt"; // Расширение файла
 
                 // Создаем объект File с указанным именем в указанной директории
-                File file = new File("D:\\scheduler_start\\JavaTest\\notes\\Saves", fileName + fileExtension);
+                File file = new File("Saves", fileName + fileExtension);
 
                 saveTextToFile(file, textArea.getText());
                 close();
