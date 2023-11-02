@@ -3,9 +3,9 @@ package com.example.notes;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
@@ -19,14 +19,16 @@ import java.util.Optional;
 import static javafx.application.Application.launch;
 
 public class NewWindow extends Stage {
-
     public NewWindow() {
-        setTitle("text redactor"); // Устанавливаем заголовок окна "text redactor"
-        StackPane root = new StackPane(); // Создаем корневой контейнер StackPane
-        TextArea textArea = new TextArea(); // Создаем текстовую область (TextArea)
+        setTitle("text redactor");
+        StackPane root = new StackPane();
+        root.getStyleClass().add("main-root"); // Применение стиля к корневому контейнеру
 
-        Button saveButton = new Button("Save");// Создаем кнопку "Save"
-        saveButton.setStyle("-fx-background-color: gray; -fx-text-fill: white;"); // Установка стилей для кнопки
+        TextArea textArea = new TextArea();
+        textArea.getStyleClass().add("text-area"); // Применение стиля к текстовому полю
+
+        Button saveButton = new Button("Save");
+        saveButton.getStyleClass().add("button"); // Применение стиля к кнопке
 
         StackPane.setAlignment(saveButton, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(saveButton, new Insets(10));
@@ -40,6 +42,9 @@ public class NewWindow extends Stage {
             dialog.setTitle("Окно сохранения файла");
             dialog.setHeaderText(null);
             dialog.setContentText("Введите имя файла:");
+            DialogPane dialogPane = dialog.getDialogPane();
+            dialogPane.getStylesheets().add("styles.css"); // Укажите путь к вашему CSS-файлу
+            dialogPane.getStyleClass().add("custom-dialog"); // Примените селектор из CSS
 
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
@@ -54,15 +59,11 @@ public class NewWindow extends Stage {
             }
         });
 
+        root.getChildren().addAll(textArea, saveButton);
 
-        root.getChildren().addAll(textArea, saveButton); // Добавляем текстовую область и кнопку в корневой контейнер
-
-        Scene scene = new Scene(root, 900, 600); // Создаем сцену с корневым контейнером и размерами
-        setScene(scene); // Устанавливаем сцену как сцену для данного окна
-        root.setStyle("-fx-background-color: darkgray;");
-
-        // Установка цвета фона для сцены
-        scene.setFill(Color.DARKGREY);
+        Scene scene = new Scene(root, 900, 600);
+        scene.getStylesheets().add("styles.css"); // Применение стилей из CSS файла к сцене
+        setScene(scene);
     }
 
     private void saveTextToFile(File file, String text) { // Метод для сохранения текста в файл

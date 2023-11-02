@@ -1,0 +1,28 @@
+.root {
+    -fx-background-color: #464646;
+}
+
+/* Стиль для кнопки в обычном состоянии */
+.button {
+    -fx-background-color: #464646;
+    -fx-text-fill: #cecdcd;
+}
+
+/* Стиль для кнопки при наведении курсора */
+.button:hover {
+    -fx-background-color: #212121;
+    -fx-text-fill: #eaeaea;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
+.text-area {
+    -fx-background-color: #464646; /* Цвет фона */
+    -fx-text-fill: #e7e7e7; /* Цвет текста */
+    -fx-font-size: 16px; /* Размер шрифта */
+}
+.text-area .content {
+    -fx-background-color: #464646;
+}

@@ -5,13 +5,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 public class HelloApplication extends Application {
 
@@ -19,13 +20,17 @@ public class HelloApplication extends Application {
     public void start(Stage primaryStage) throws Exception {
         StackPane root = new StackPane();
         Scene scene = new Scene(root, 900, 600);
+
+        // Применить глобальный CSS-файл ко всей сцене
+        scene.getStylesheets().add("styles.css");
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Главное очко");
+        primaryStage.show();
         File folder = new File("Saves");
         File[] files = folder.listFiles();
 
         Button btn = new Button("Написать о членах");
-        btn.setStyle("-fx-background-color: gray; -fx-text-fill: white;"); // Установка стилей для кнопки
 
         StackPane.setAlignment(btn, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(btn, new Insets(10));
@@ -36,17 +41,6 @@ public class HelloApplication extends Application {
         });
 
         root.getChildren().add(btn);
-
-        // Установка цвета фона для корневого контейнера
-        root.setStyle("-fx-background-color: darkgray;");
-
-        // Установка цвета фона для сцены
-        scene.setFill(Color.DARKGREY);
-
-        // Установка цвета фона для сцены
-        scene.setFill(Color.DARKGREY);
-
-        // Создайте GridPane для отображения плиток
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10); // Горизонтальный отступ между плитками
@@ -61,11 +55,30 @@ public class HelloApplication extends Application {
         for (File file : files) {
             if (file.isFile()) {
                 Button tile = new Button(file.getName());
-                tile.setStyle("-fx-background-color: gray; -fx-text-fill: white;");
+                //applyStyles(tile);
 
                 tile.setOnAction(e -> {
-                    // Откройте файл при нажатии на плитку
-                });
+                            // Откройте файл при нажатии на плитку
+                            // Получите имя файла, связанное с этой кнопкой
+                            String fileName = ((Button) e.getSource()).getText();
+
+                            // Создайте путь к файлу, используя папку "Saves" и имя файла
+                            String filePath = "Saves" + File.separator + fileName;
+
+                            // Попытайтесь открыть файл
+                            try {
+                                File fileToOpen = new File(filePath);
+                                if (fileToOpen.exists() && Desktop.isDesktopSupported()) {
+                                    Desktop.getDesktop().open(fileToOpen);
+                                } else {
+                                    System.out.println("Файл не найден или не поддерживается открытие.");
+                                }
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                System.out.println("Ошибка открытия файла: " + ex.getMessage());
+                            }
+                        }
+                );
 
                 // Добавьте плитку в GridPane
                 grid.add(tile, column, row);
@@ -81,7 +94,6 @@ public class HelloApplication extends Application {
 
         root.getChildren().add(grid); // Добавьте GridPane на корневой контейнер
 
-        primaryStage.show();
     }
 
     public static void main(String[] args) {

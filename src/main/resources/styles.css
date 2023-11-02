@@ -1,0 +1,43 @@
+.root {
+    -fx-background-color: #5b5b5b;
+}
+
+/* Стиль для кнопки в обычном состоянии */
+.button {
+    -fx-background-color: #4b4b4b;
+    -fx-text-fill: #cecdcd;
+}
+
+/* Стиль для кнопки при наведении курсора */
+.button:hover {
+    -fx-background-color: #212121;
+    -fx-text-fill: #eaeaea;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #333333;
+}
+.text-area {
+    -fx-text-fill: #d7d6d6; /* Цвет текста */
+    -fx-font-size: 16px; /* Размер шрифта */
+}
+.text-area .content {
+    -fx-background-color: #5b5b5b;
+}
+/* Стиль для TextInputDialog */
+.custom-dialog {
+    -fx-background-color: #737373;
+    -fx-text-fill: #ececec;
+    -fx-font-size: 14px;
+}
+/* Стиль для TextInputDialog Header */
+.custom-dialog .header-panel {
+    -fx-background-color: #737373;
+    -fx-text-fill: #eaeaea;
+}
+
+/* Стиль для TextInputDialog Content */
+.custom-dialog .content {
+    -fx-background-color: #737373;
+}
