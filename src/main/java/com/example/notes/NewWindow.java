@@ -3,32 +3,32 @@ package com.example.notes;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Button;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Optional;
-
-import static javafx.application.Application.launch;
+import java.awt.Desktop;
 
 public class NewWindow extends Stage {
-    public NewWindow() {
-        setTitle("text redactor");
-        StackPane root = new StackPane();
-        root.getStyleClass().add("main-root"); // Применение стиля к корневому контейнеру
+    private TextArea textArea;
 
-        TextArea textArea = new TextArea();
-        textArea.getStyleClass().add("text-area"); // Применение стиля к текстовому полю
+    public NewWindow() {
+        setTitle("Text Redactor");
+        StackPane root = new StackPane();
+        root.getStyleClass().add("main-root");
+
+        textArea = new TextArea();
+        textArea.getStyleClass().add("text-area");
 
         Button saveButton = new Button("Save");
-        saveButton.getStyleClass().add("button"); // Применение стиля к кнопке
+        saveButton.getStyleClass().add("button");
 
         StackPane.setAlignment(saveButton, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(saveButton, new Insets(10));
@@ -39,19 +39,18 @@ public class NewWindow extends Stage {
 
             // Запрос имени файла у пользователя
             TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Окно сохранения файла");
+            dialog.setTitle("Сохранить файл");
             dialog.setHeaderText(null);
             dialog.setContentText("Введите имя файла:");
             DialogPane dialogPane = dialog.getDialogPane();
-            dialogPane.getStylesheets().add("styles.css"); // Укажите путь к вашему CSS-файлу
-            dialogPane.getStyleClass().add("custom-dialog"); // Примените селектор из CSS
+            dialogPane.getStylesheets().add("styles.css");
+            dialogPane.getStyleClass().add("custom-dialog");
 
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent()) {
                 String fileName = result.get();
-                String fileExtension = ".txt"; // Расширение файла
+                String fileExtension = ".txt";
 
-                // Создаем объект File с указанным именем в указанной директории
                 File file = new File("Saves", fileName + fileExtension);
 
                 saveTextToFile(file, textArea.getText());
@@ -62,19 +61,25 @@ public class NewWindow extends Stage {
         root.getChildren().addAll(textArea, saveButton);
 
         Scene scene = new Scene(root, 900, 600);
-        scene.getStylesheets().add("styles.css"); // Применение стилей из CSS файла к сцене
+        scene.getStylesheets().add("styles.css");
         setScene(scene);
     }
 
-    private void saveTextToFile(File file, String text) { // Метод для сохранения текста в файл
-        try (FileWriter writer = new FileWriter(file)) { // Создаем FileWriter для записи в файл
-            writer.write(text); // Записываем текст в файл
-        } catch (IOException e) { // Обрабатываем исключение, если произошла ошибка ввода-вывода
-            e.printStackTrace(); // Выводим информацию об ошибке
+    private void saveTextToFile(File file, String text) {
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(text);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        launch(args); // Запускаем приложение JavaFX
+    public void openFile(File file) {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
