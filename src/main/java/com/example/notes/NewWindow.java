@@ -31,7 +31,7 @@ public class NewWindow extends Stage {
         saveButton.getStyleClass().add("button");
 
         StackPane.setAlignment(saveButton, Pos.BOTTOM_RIGHT);
-        StackPane.setMargin(saveButton, new Insets(10));
+        StackPane.setMargin(saveButton, new Insets(15));
 
         saveButton.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();

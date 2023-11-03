@@ -42,7 +42,7 @@ public class HelloApplication extends Application {
         for (File file : files) {
             if (file.isFile()) {
                 Button fileButton = new Button(file.getName());
-                fileButton.getStyleClass().add("file-button"); // Применить стили к кнопке
+                fileButton.getStyleClass().addAll("file-button", "icon-button");
 
                 fileButton.setOnAction(e -> {
                     String fileName = file.getName();
