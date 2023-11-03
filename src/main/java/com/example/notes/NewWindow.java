@@ -37,7 +37,6 @@ public class NewWindow extends Stage {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setInitialDirectory(new File("Saves"));
 
-            // Запрос имени файла у пользователя
             TextInputDialog dialog = new TextInputDialog();
             dialog.setTitle("Сохранить файл");
             dialog.setHeaderText(null);

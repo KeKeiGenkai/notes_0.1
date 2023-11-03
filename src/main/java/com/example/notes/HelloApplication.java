@@ -20,14 +20,12 @@ public class HelloApplication extends Application {
         StackPane root = new StackPane();
         Scene scene = new Scene(root, 900, 600);
 
-        // Применить глобальный CSS-файл ко всей сцене
         scene.getStylesheets().add("styles.css");
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Главное окно");
+        primaryStage.setTitle("Note from bashi");
         primaryStage.show();
 
-        // Добавим кнопки с файлами в папке "Saves" в виде плиток
         File folder = new File("Saves");
         File[] files = folder.listFiles();
 
@@ -53,11 +51,11 @@ public class HelloApplication extends Application {
                         if (fileToOpen.exists() && Desktop.isDesktopSupported()) {
                             openFile(fileToOpen);
                         } else {
-                            System.out.println("Файл не найден или не поддерживается открытие.");
+                            System.out.println("File not found or not supported to open.");
                         }
                     } catch (IOException ex) {
                         ex.printStackTrace();
-                        System.out.println("Ошибка открытия файла: " + ex.getMessage());
+                        System.out.println("Error text opened: " + ex.getMessage());
                     }
                 });
 
@@ -73,8 +71,7 @@ public class HelloApplication extends Application {
 
         root.getChildren().add(grid);
 
-        // Кнопка "Написать о членах"
-        Button btn = new Button("Написать о членах");
+        Button btn = new Button("write...");
         StackPane.setAlignment(btn, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(btn, new Insets(10));
 
@@ -94,7 +91,7 @@ public class HelloApplication extends Application {
         if (Desktop.isDesktopSupported()) {
             Desktop.getDesktop().open(file);
         } else {
-            System.out.println("Система не поддерживает открытие файла.");
+            System.out.println("The system does not support opening the file.");
         }
     }
 }

@@ -14,8 +14,8 @@
     -fx-text-fill: #333333;
 }
 .text-area {
-    -fx-text-fill: #d7d6d6; /* Цвет текста */
-    -fx-font-size: 16px; /* Размер шрифта */
+    -fx-text-fill: #d7d6d6;
+    -fx-font-size: 16px;
 }
 .text-area .content {
     -fx-background-color: #5b5b5b;
